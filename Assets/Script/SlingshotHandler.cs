@@ -47,18 +47,18 @@ public class SlingshotHandler : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame && _slingShotArea.isWithinSlingshotArea()) {
+        if(InputManager.WasLeftMouseButtonPressed && _slingShotArea.isWithinSlingshotArea()) {
             _clickedWithinArea = true;
         }
         //_clickedWithinArea = Mouse.current.leftButton.wasPressedThisFrame && _slingShotArea.isWithinSlingshotArea();
        
-        if (Mouse.current.leftButton.isPressed && _clickedWithinArea && _birdOnSlingshot) 
+        if (InputManager.IsLeftMousePressed && _clickedWithinArea && _birdOnSlingshot) 
         {
             DrawSlingShot();
             PositionAndRotateBird();
         }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame && _birdOnSlingshot) {
+        if (InputManager.WasLeftMouseButtonReleased && _birdOnSlingshot) {
             if (GameManager.instance.isShotAvailable()) {
                 _clickedWithinArea = false;
 
@@ -81,7 +81,7 @@ public class SlingshotHandler : MonoBehaviour
 
     private void DrawSlingShot() 
     {
-        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(InputManager.MousePosition);
 
         _slingShotLinesPosition = _centerPos.position + Vector3.ClampMagnitude(touchPosition - _centerPos.position, _maxDistance);
 

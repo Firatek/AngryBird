@@ -10,14 +10,18 @@ public class GameManager : MonoBehaviour
 
     public int MaxNumberOfShots = 3;
 
-    private int _usedNumberOfShots;
+
     [SerializeField] private float _waitOfLastShot = 1f;
+    [SerializeField] private GameObject _restartScreenObject;
+    [SerializeField] private SlingshotHandler _slingShotHandler;
 
     private IconHandler _iconHandler;
 
+    private int _usedNumberOfShots;
+
     private List<Porky> _porkies = new List<Porky>();
 
-    [SerializeField] private GameObject _restartScreenObject;
+
 
     private void Awake() {
         if (instance == null) {
@@ -29,8 +33,6 @@ public class GameManager : MonoBehaviour
         foreach(Porky p in porkies) {
             _porkies.Add(p);
         }
-        Debug.Log(_porkies + "lenght = " + _porkies.Count);
-
     }
 
     public Boolean isShotAvailable() {
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
         if (_porkies.Count <= 0) {
             WinGame();
         } else {
-            LoseGame();
+            RestartGame();
         }
     }
 
@@ -77,10 +79,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void WinGame() {
-        Debug.Log("win");
         _restartScreenObject.SetActive(true);
+        _slingShotHandler.enabled = false;
     }
-    private void LoseGame() {
+    public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     #endregion

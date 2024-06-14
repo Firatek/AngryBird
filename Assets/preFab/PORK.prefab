@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 3
   _damageThreshold: 5
+  _baddieDeathParticle: {fileID: 4715105123548874615, guid: cb4eb090ec91ffc4d8554f9643ee91ee, type: 3}
